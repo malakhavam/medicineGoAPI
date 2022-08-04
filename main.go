@@ -1,7 +1,7 @@
 package main
 
 import (
-   
+    "os"
     "log"
     "net/http"
     "github.com/malakhavam/medicineGoAPI/routes"
@@ -16,6 +16,6 @@ func main() {
   http.Handle("api", router)
 
 
-    log.Fatal(http.ListenAndServe(":3000", router)) 
+    log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), router)) 
     
 }
