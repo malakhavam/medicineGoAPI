@@ -1,7 +1,6 @@
 package controller
 
 import (
-    
     "net/http"
     "math/rand"
     "strconv"
@@ -13,17 +12,19 @@ import (
 
   // function to get all drugs
 
-  func getDrugs(w http.ResponseWriter, r *http.Request) {
+  func GetDrugs(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(drugs)
+    w.WriteHeader(http.StatusOK)
+    alldrugs := db.DrugList
+    json.NewEncoder(w).Encode(alldrugs)
 }
-   // function to get drug
+   // function to get one drug
 
-   func getDrug(w http.ResponseWriter, r *http.Request) {
+   func GetDrug(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
 
     params := mux.Vars(r)
-    for _, item := range drugs {
+    for _, item := range db.DrugList {
        if item.ID == params["id"] {
           json.NewEncoder(w).Encode(item)
           return
@@ -34,44 +35,44 @@ import (
 
 // function to create new drug
 
-func createDrug(w http.ResponseWriter, r *http.Request) {
+func CreateDrug(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
-    var drug Drug
+    var drug models.Drug
     _ = json.NewDecoder(r.Body).Decode(&drug)
     drug.ID = strconv.Itoa(rand.Intn(1000000))
-    drugs = append(drugs, drug) 
+    db.DrugList = append(db.DrugList, drug) 
     json.NewEncoder(w).Encode(drug)
 }
 
 // function to update drug
 
-func updateDrug(w http.ResponseWriter, r *http.Request) {
+func UpdateDrug(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     params := mux.Vars(r)
-    for index, item := range drugs {
+    for index, item := range db.DrugList {
         if item.ID == params["id"] {
-            drugs = append(drugs[:index], drugs[index+1:]...)
-            var drug Drug
+            db.DrugList = append(db.DrugList[:index], db.DrugList[index+1:]...)
+            var drug models.Drug
             _ = json.NewDecoder(r.Body).Decode(&drug)
             drug.ID = params["id"]
-            drugs = append(drugs, drug) 
+            db.DrugList = append(db.DrugList, drug) 
             json.NewEncoder(w).Encode(drug)
             return
         }
     }
-    json.NewEncoder(w).Encode(drugs)
+    json.NewEncoder(w).Encode(db.DrugList)
 }
 
 // function to delete drug
 
-func deleteDrug(w http.ResponseWriter, r *http.Request) {
+func DeleteDrug(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     params := mux.Vars(r)
-    for index, item := range drugs {
+    for index, item := range db.DrugList {
         if item.ID == params["id"] {
-            drugs = append(drugs[:index], drugs[index+1:]...)
+            db.DrugList = append(db.DrugList[:index], db.DrugList[index+1:]...)
             break
         }
     }
-    json.NewEncoder(w).Encode(drugs)
+    json.NewEncoder(w).Encode(db.DrugList)
 }
