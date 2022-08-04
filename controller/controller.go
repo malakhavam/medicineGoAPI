@@ -7,8 +7,8 @@ import (
     "strconv"
     "encoding/json"
     "github.com/gorilla/mux"
-	"github.com/malakhavam/medicineGoApi/models"
-	"github.com/malakhavam/medicineGoApi/db"
+	"github.com/malakhavam/medicineGoAPI/models"
+	"github.com/malakhavam/medicineGoAPI/db"
   )
 
   // function to get all drugs
