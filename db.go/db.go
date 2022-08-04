@@ -1,6 +1,6 @@
 package db
 
-import "github.com/malakhavam/models"
+import "github.com/malakhavam/medicineGoApi/models"
 
 var drugs = []models.Drug {
 	{

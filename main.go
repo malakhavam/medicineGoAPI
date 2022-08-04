@@ -4,8 +4,8 @@ import (
     "log"
     "net/http"
     "github.com/gorilla/mux"
-    "github.com/malakhavam/models"
-    "github.com/malakhavam/controller"
+    "github.com/malakhavam/medicineGoApi/models"
+    "github.com/malakhavam/medicineGoApi/controller"
   )
 
 // main function
