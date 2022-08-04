@@ -2,7 +2,7 @@ package db
 
 import "github.com/malakhavam/medicineGoAPI/models"
 
-var drugs = []models.Drug {
+var drugs = []Drug {
 	{
 		ID: "1", 
 		Name: "Zyrtec", 

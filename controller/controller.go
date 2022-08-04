@@ -1,7 +1,7 @@
 package controller
 
 import (
-    "log"
+    
     "net/http"
     "math/rand"
     "strconv"
