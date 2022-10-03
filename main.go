@@ -13,9 +13,9 @@ import (
 
 func main() {
   router := routes.DrugRoutes()
-  http.Handle("api", router)
+  http.Handle("/api", router)
 
-
+    log.Println("Listening...")
     log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), router)) 
     
 }
